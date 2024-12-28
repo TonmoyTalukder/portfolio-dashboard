@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   Button,
   Input,
@@ -10,19 +10,25 @@ import {
   ModalBody,
   ModalFooter,
   useDisclosure,
-} from "@nextui-org/react";
-import { toast } from "sonner";
+  Table,
+  TableHeader,
+  TableColumn,
+  TableBody,
+  TableRow,
+  TableCell,
+} from '@nextui-org/react';
+import { toast } from 'sonner';
 
-import { ISkill } from "@/src/types";
+import { ISkill } from '@/src/types';
 import {
   useCreateSkill,
   useDeleteSkill,
   useFetchSkills,
   useUpdateSkill,
-} from "@/src/hooks/skill.hooks";
+} from '@/src/hooks/skill.hooks';
 
 const SkillPage = () => {
-  const [newSkill, setNewSkill] = useState("");
+  const [newSkill, setNewSkill] = useState('');
   const [editingSkill, setEditingSkill] = useState<ISkill | null>(null);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
@@ -34,7 +40,7 @@ const SkillPage = () => {
 
   const handleCreateSkill = () => {
     if (!newSkill.trim()) {
-      toast.error("Skill name cannot be empty.");
+      toast.error('Skill name cannot be empty.');
 
       return;
     }
@@ -43,11 +49,11 @@ const SkillPage = () => {
       { name: newSkill.trim() },
       {
         onSuccess: () => {
-          setNewSkill("");
+          setNewSkill('');
           onOpenChange();
         },
         onError: (error) => {
-          toast.error(error.message || "Failed to create skill.");
+          toast.error(error.message || 'Failed to create skill.');
         },
       },
     );
@@ -56,7 +62,7 @@ const SkillPage = () => {
   const handleDeleteSkill = (skillId: string) => {
     deleteSkillMutation.mutate(skillId, {
       onError: (error) => {
-        toast.error(error.message || "Failed to delete skill.");
+        toast.error(error.message || 'Failed to delete skill.');
       },
     });
   };
@@ -71,7 +77,7 @@ const SkillPage = () => {
           setEditingSkill(null);
         },
         onError: (error) => {
-          toast.error(error.message || "Failed to update skill.");
+          toast.error(error.message || 'Failed to update skill.');
         },
       },
     );
@@ -90,17 +96,16 @@ const SkillPage = () => {
       </Button>
 
       {/* Skills Table */}
-      <table className="w-full border-collapse border border-gray-300 shadow-md">
-        <thead>
-          <tr className="bg-blue-100">
-            <th className="border border-gray-300 p-4 text-left">Skill Name</th>
-            <th className="border border-gray-300 p-4 text-center">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
+
+      <Table>
+        <TableHeader>
+          <TableColumn>Skill Name</TableColumn>
+          <TableColumn>Actions</TableColumn>
+        </TableHeader>
+        <TableBody>
           {skills?.map((skill: ISkill) => (
-            <tr key={skill._id} className="hover:bg-gray-100">
-              <td className="border border-gray-300 p-4">
+            <TableRow key={skill._id} className="hover:bg-gray-100">
+              <TableCell>
                 {editingSkill?._id === skill._id ? (
                   <Input
                     value={editingSkill?.name}
@@ -111,8 +116,8 @@ const SkillPage = () => {
                 ) : (
                   skill.name
                 )}
-              </td>
-              <td className="border border-gray-300 p-4 text-center space-x-2">
+              </TableCell>
+              <TableCell>
                 {editingSkill?._id === skill._id ? (
                   <>
                     <Button
@@ -148,11 +153,11 @@ const SkillPage = () => {
                     </Button>
                   </>
                 )}
-              </td>
-            </tr>
+              </TableCell>
+            </TableRow>
           ))}
-        </tbody>
-      </table>
+        </TableBody>
+      </Table>
 
       {/* Create Skill Modal */}
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>

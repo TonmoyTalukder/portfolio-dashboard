@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import {
   Modal,
   ModalContent,
@@ -11,15 +11,21 @@ import {
   Input,
   Textarea,
   useDisclosure,
-} from "@nextui-org/react";
+  Table,
+  TableHeader,
+  TableColumn,
+  TableBody,
+  TableRow,
+  TableCell,
+} from '@nextui-org/react';
 
-import { IProject } from "@/src/types";
+import { IProject } from '@/src/types';
 import {
   useCreateProject,
   useDeleteProject,
   useFetchProjects,
   useUpdateProject,
-} from "@/src/hooks/project.hooks";
+} from '@/src/hooks/project.hooks';
 
 const ProjectsPage = () => {
   const { data: projectsData, isLoading, error } = useFetchProjects();
@@ -29,10 +35,10 @@ const ProjectsPage = () => {
 
   const fetchedProject = projectsData?.data;
 
-  console.log("Fetched projects: ", fetchedProject);
+  console.log('Fetched projects: ', fetchedProject);
 
   const [projects, setProjects] = useState<IProject[]>([]);
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState('');
   const {
     isOpen: isCreateModalOpen,
     onOpen: openCreateModal,
@@ -50,13 +56,13 @@ const ProjectsPage = () => {
   } = useDisclosure();
   const [selectedProject, setSelectedProject] = useState<IProject | null>(null);
   const [newProject, setNewProject] = useState({
-    title: "",
-    description: "",
-    tags: "",
-    imageUrl: "",
-    link: "",
-    frontend: "",
-    backend: "",
+    title: '',
+    description: '',
+    tags: '',
+    imageUrl: '',
+    link: '',
+    frontend: '',
+    backend: '',
   });
 
   useEffect(() => {
@@ -75,7 +81,7 @@ const ProjectsPage = () => {
     const projectPayload = {
       title: newProject.title,
       description: newProject.description,
-      tags: newProject.tags.split(",").map((tag) => tag.trim()),
+      tags: newProject.tags.split(',').map((tag) => tag.trim()),
       imageUrl: newProject.imageUrl,
       link: newProject.link,
       frontend: newProject.frontend,
@@ -89,13 +95,13 @@ const ProjectsPage = () => {
         );
         toggleCreateModal();
         setNewProject({
-          title: "",
-          description: "",
-          tags: "",
-          imageUrl: "",
-          link: "",
-          frontend: "",
-          backend: "",
+          title: '',
+          description: '',
+          tags: '',
+          imageUrl: '',
+          link: '',
+          frontend: '',
+          backend: '',
         });
       },
     });
@@ -161,28 +167,20 @@ const ProjectsPage = () => {
       </Button>
 
       {/* Projects Table */}
-      <table className="w-full border-collapse border border-gray-300 shadow-md">
-        <thead>
-          <tr className="bg-blue-100">
-            <th className="border border-gray-300 p-4 text-left">Title</th>
-            <th className="border border-gray-300 p-4 text-left">
-              Description
-            </th>
-            <th className="border border-gray-300 p-4 text-left">Tags</th>
-            <th className="border border-gray-300 p-4 text-center">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
+      <Table>
+        <TableHeader>
+          <TableColumn>Title</TableColumn>
+          <TableColumn>Description</TableColumn>
+          <TableColumn>Tags</TableColumn>
+          <TableColumn>Actions</TableColumn>
+        </TableHeader>
+        <TableBody>
           {filteredProjects.map((project, index) => (
-            <tr key={index} className="hover:bg-gray-100">
-              <td className="border border-gray-300 p-4">{project.title}</td>
-              <td className="border border-gray-300 p-4">
-                {project.description}
-              </td>
-              <td className="border border-gray-300 p-4">
-                {project.tags.join(", ")}
-              </td>
-              <td className="border border-gray-300 p-4 text-center">
+            <TableRow key={index} className="hover:bg-gray-100">
+              <TableCell>{project.title}</TableCell>
+              <TableCell>{project.description}</TableCell>
+              <TableCell>{project.tags.join(', ')}</TableCell>
+              <TableCell>
                 <Button
                   onPress={() => {
                     setSelectedProject(project);
@@ -200,11 +198,11 @@ const ProjectsPage = () => {
                 >
                   Delete
                 </Button>
-              </td>
-            </tr>
+              </TableCell>
+            </TableRow>
           ))}
-        </tbody>
-      </table>
+        </TableBody>
+      </Table>
 
       {/* Create Project Modal */}
       <Modal isOpen={isCreateModalOpen} onOpenChange={toggleCreateModal}>
@@ -295,7 +293,7 @@ const ProjectsPage = () => {
                 <Input
                   required
                   label="Title"
-                  value={selectedProject?.title || ""}
+                  value={selectedProject?.title || ''}
                   onChange={(e) =>
                     setSelectedProject({
                       ...selectedProject!,
@@ -306,7 +304,7 @@ const ProjectsPage = () => {
                 <Textarea
                   required
                   label="Description"
-                  value={selectedProject?.description || ""}
+                  value={selectedProject?.description || ''}
                   onChange={(e) =>
                     setSelectedProject({
                       ...selectedProject!,
@@ -316,17 +314,17 @@ const ProjectsPage = () => {
                 />
                 <Input
                   label="Tags (comma-separated)"
-                  value={selectedProject?.tags.join(", ") || ""}
+                  value={selectedProject?.tags.join(', ') || ''}
                   onChange={(e) =>
                     setSelectedProject({
                       ...selectedProject!,
-                      tags: e.target.value.split(",").map((tag) => tag.trim()),
+                      tags: e.target.value.split(',').map((tag) => tag.trim()),
                     })
                   }
                 />
                 <Input
                   label="Image URL"
-                  value={selectedProject?.imageUrl || ""}
+                  value={selectedProject?.imageUrl || ''}
                   onChange={(e) =>
                     setSelectedProject({
                       ...selectedProject!,
@@ -336,7 +334,7 @@ const ProjectsPage = () => {
                 />
                 <Input
                   label="Project Link"
-                  value={selectedProject?.link || ""}
+                  value={selectedProject?.link || ''}
                   onChange={(e) =>
                     setSelectedProject({
                       ...selectedProject!,
@@ -346,7 +344,7 @@ const ProjectsPage = () => {
                 />
                 <Input
                   label="Frontend Repo"
-                  value={selectedProject?.frontend || ""}
+                  value={selectedProject?.frontend || ''}
                   onChange={(e) =>
                     setSelectedProject({
                       ...selectedProject!,
@@ -356,7 +354,7 @@ const ProjectsPage = () => {
                 />
                 <Input
                   label="Backend Repo"
-                  value={selectedProject?.backend || ""}
+                  value={selectedProject?.backend || ''}
                   onChange={(e) =>
                     setSelectedProject({
                       ...selectedProject!,
