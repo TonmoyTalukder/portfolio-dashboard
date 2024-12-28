@@ -23,7 +23,7 @@ const Dashboard = () => {
   const maxCount = Math.max(totalSkills, totalProjects);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+    <div className="flex flex-col items-center justify-center min-h-screen">
       {(skillsLoading || projectsLoading) && (
         <div className="flex items-center justify-center h-screen">
           <div>Loading Data...</div>

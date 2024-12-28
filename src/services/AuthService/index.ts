@@ -26,7 +26,11 @@ export const registerUser = async (userData: FieldValues) => {
 
 export const loginUser = async (userData: FieldValues) => {
   try {
+    console.log("Logging user data: ", userData);
+    console.log("API: ", process.env.NEXT_PUBLIC_BASE_API);
     const { data } = await axiosInstance.post("/auth/login", userData);
+
+    console.log("Response Data: ", data);
 
     if (data.success) {
       cookies().set("accessToken", data?.data?.accessToken);

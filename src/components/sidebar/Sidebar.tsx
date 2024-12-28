@@ -12,6 +12,7 @@ import { RiBloggerLine } from "react-icons/ri";
 import Link from "next/link";
 
 import useScreenWidth from "../hooks/useScreenWidth";
+import { ThemeSwitch } from "../UI/theme-switch";
 
 import { logout } from "@/src/services/AuthService";
 
@@ -68,7 +69,7 @@ const Sidebar = () => {
       {/* Header */}
       {!smScreen && (
         <div className="p-4 flex justify-between items-center">
-          {!collapsed && <h1 className="text-xl font-bold">MartPlex</h1>}
+          {!collapsed && <h1 className="text-xl font-bold">Tonmoy Talukder</h1>}
           <button
             className={`p-2 rounded-md ${theme === "dark" ? "text-white" : "text-black"} hover:bg-zinc-600`}
             onClick={() => setCollapsed(!collapsed)}
@@ -139,6 +140,30 @@ const Sidebar = () => {
             <IoLogOut className="w-6 h-6" />
             <span>Logout</span>
           </button>
+        )}
+
+        {collapsed ? (
+          <Tooltip
+            key="theme"
+            className="w-full"
+            content="Theme"
+            placement="right"
+          >
+            <button
+              className={`flex flex-col items-center gap-x-0 mb-7 py-2 cursor-pointer w-full ${
+                theme === "dark" ? "hover:bg-zinc-800" : "hover:bg-zinc-400"
+              } rounded-md`}
+            >
+              <ThemeSwitch />
+            </button>
+          </Tooltip>
+        ) : (
+          <div
+            key="theme"
+            className={`flex flex-row items-center gap-4 p-4 rounded-md w-full`}
+          >
+            <ThemeSwitch />
+          </div>
         )}
       </div>
     </div>

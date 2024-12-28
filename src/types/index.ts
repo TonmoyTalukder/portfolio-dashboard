@@ -30,6 +30,14 @@ export interface ISkill {
   name: string;
 }
 
+export interface IBlog {
+  _id?: string;
+  title: string;
+  tags: string[];
+  coverImage: string;
+  text: string;
+}
+
 export interface IUser {
   id?: string;
   name?: string;

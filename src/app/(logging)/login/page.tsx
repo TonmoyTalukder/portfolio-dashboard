@@ -19,6 +19,7 @@ export default function LoginPage() {
   const redirect = searchParams.get("redirect");
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    console.log(data);
     handleUserLogin(data);
     userLoading(true);
   };

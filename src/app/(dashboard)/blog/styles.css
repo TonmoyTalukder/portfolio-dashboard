@@ -1,0 +1,102 @@
+/* General Styles for Editor Content */
+.tiptap-editor-content {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  padding: 1rem;
+}
+
+/* Heading Styles */
+.tiptap-editor-content h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #1a202c; /* Dark gray */
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #e2e8f0; /* Light gray */
+  padding-bottom: 0.25rem;
+}
+
+.tiptap-editor-content h2 {
+  font-size: 1.75rem;
+  font-weight: bold;
+  color: #2d3748; /* Slightly lighter dark gray */
+  margin-bottom: 0.75rem;
+}
+
+.tiptap-editor-content h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #4a5568; /* Mid gray */
+  margin-bottom: 0.5rem;
+}
+
+/* Paragraph Style */
+.tiptap-editor-content p {
+  font-size: 1rem;
+  color: #4a5568;
+  margin-bottom: 1rem;
+}
+
+/* Code Block Style */
+.tiptap-editor-content pre {
+  background-color: #f7fafc; /* Light gray for background */
+  color: #2d3748; /* Text color */
+  font-family: 'Courier New', Courier, monospace;
+  padding: 1rem;
+  border-radius: 4px;
+  border: 1px solid #e2e8f0;
+  overflow-x: auto;
+  margin-bottom: 1rem;
+}
+
+.tiptap-editor-content code {
+  background-color: #edf2f7;
+  color: #1a202c;
+  font-family: 'Courier New', Courier, monospace;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+}
+
+/* Highlight Style */
+.tiptap-editor-content mark {
+  background-color: yellow;
+  color: black;
+  padding: 0 0.2rem;
+}
+
+/* Text Alignment */
+.tiptap-editor-content .text-align-left {
+  text-align: left;
+}
+
+.tiptap-editor-content .text-align-center {
+  text-align: center;
+}
+
+.tiptap-editor-content .text-align-right {
+  text-align: right;
+}
+
+.tiptap-editor-content .text-align-justify {
+  text-align: justify;
+}
+
+/* Editor Font Sizes */
+.tiptap-editor-content .text-xs {
+  font-size: 0.75rem;
+}
+
+.tiptap-editor-content .text-sm {
+  font-size: 0.875rem;
+}
+
+.tiptap-editor-content .text-base {
+  font-size: 1rem;
+}
+
+.tiptap-editor-content .text-lg {
+  font-size: 1.125rem;
+}
+
+.tiptap-editor-content .text-xl {
+  font-size: 1.25rem;
+}

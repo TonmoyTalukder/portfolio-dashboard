@@ -32,7 +32,10 @@ let loadingToastId: string | number | undefined;
 export const useUserLogin = () => {
   return useMutation<any, Error, FieldValues>({
     mutationKey: ["USER_LOGIN"],
-    mutationFn: async (userData: any) => await loginUser(userData),
+    mutationFn: async (userData: any) => {
+      console.log("User Data from hooks: ", userData);
+      await loginUser(userData);
+    },
     onMutate: () => {
       // Show a loading notification
       loadingToastId = toast.message("User is logging in...", {
@@ -44,10 +47,11 @@ export const useUserLogin = () => {
       if (loadingToastId) toast.dismiss(loadingToastId);
       toast.success("User logged in successfully.");
     },
-    onError: () => {
+    onError: (error) => {
       // Remove loading notification and show error
       if (loadingToastId) toast.dismiss(loadingToastId);
       toast.error("User credentials are invalid!");
+      console.log(error);
     },
   });
 };
